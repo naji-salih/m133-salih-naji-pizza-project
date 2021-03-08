@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="m133-salih-naji-pizza-project:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>m133-salih-naji-pizza-project</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="m133-salih-naji-pizza-project-1.0.war">
+      <element id="artifact" artifact-name="m133-salih-naji-pizza-project:war exploded" />
+    </root>
+  </artifact>
+</component>
