@@ -1,5 +1,12 @@
 package ch.bzz.pizza.model;
 
+/**
+ * data object User
+ * <p>
+ * M133
+ *
+ * @author Naji Salih
+ */
 public class User {
     private String userUUID;
     private String userName;

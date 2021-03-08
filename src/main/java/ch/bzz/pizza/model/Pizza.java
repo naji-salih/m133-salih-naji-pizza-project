@@ -1,5 +1,12 @@
 package ch.bzz.pizza.model;
 
+/**
+ * data object Pizza
+ * <p>
+ * M133
+ *
+ * @author Naji Salih
+ */
 public class Pizza {
     private String pizzaUUID;
     private String name;

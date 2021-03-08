@@ -3,6 +3,13 @@ package ch.bzz.pizza.model;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * data object Menu
+ * <p>
+ * M133
+ *
+ * @author Naji Salih
+ */
 public class Menu {
     private String menuUUID;
     private Date veroeffentlichung;
