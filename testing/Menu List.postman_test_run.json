@@ -1,0 +1,252 @@
+{
+	"id": "53f4a5b2-f20c-4d55-94bf-630b7ed8bd57",
+	"name": "Menu List",
+	"timestamp": "2021-03-08T21:58:46.612Z",
+	"collection_id": "2f91f98e-0d97-4200-992e-73e1839f41bb",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 14,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "745ba91a-e0ea-4559-814c-598f2297286c",
+			"name": "Get Alle Pizzas",
+			"url": "http://localhost:8080/m133-salih-naji-pizza-project-1.0/resource/pizza/list",
+			"time": 95,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"Validate response": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Validate response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				95
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"Validate response": true
+				}
+			]
+		},
+		{
+			"id": "16cea74e-dadb-422f-b72b-f6bb6a5b928c",
+			"name": "Get Alle Menus",
+			"url": "http://localhost:8080/m133-salih-naji-pizza-project-1.0/resource/menu/list",
+			"time": 36,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"Validate response": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Validate response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				36
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"Validate response": true
+				}
+			]
+		},
+		{
+			"id": "1b1ea4d7-d48c-400f-b96c-a28d3fea27e0",
+			"name": "Get Eine Pizza",
+			"url": "http://localhost:8080/m133-salih-naji-pizza-project-1.0/resource/pizza/read?uuid=3247c340-c712-402e-b400-0a23a9368c97",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"Validate response": true,
+				"Validate response durchmesser": true,
+				"Validate response preis": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Validate response": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Validate response durchmesser": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Validate response preis": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"Validate response": true,
+					"Validate response durchmesser": true,
+					"Validate response preis": true
+				}
+			]
+		},
+		{
+			"id": "eeca6e87-1dd1-4f71-bda5-34ba755ba006",
+			"name": "Get Ein Menu",
+			"url": "http://localhost:8080/m133-salih-naji-pizza-project-1.0/resource/menu/read?uuid=ecd86148-5341-43c6-81ed-f3f4595965dc",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"Validate response": true,
+				"Validate response veröffentlichungsdatum": true,
+				"Validate response name": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Validate response": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Validate response veröffentlichungsdatum": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Validate response name": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"Validate response": true,
+					"Validate response veröffentlichungsdatum": true,
+					"Validate response name": true
+				}
+			]
+		},
+		{
+			"id": "4b69cc43-df71-4641-b606-c811b96a4be3",
+			"name": "Get Pizza with not existing UUID",
+			"url": "http://localhost:8080/m133-salih-naji-pizza-project-1.0/resource/pizza/read?uuid=ecd86148-5341-43c6-81ed-f3f4595965d1",
+			"time": 13,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				13
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "863e0b70-bb5d-42fb-9c0b-32364a5117a6",
+			"name": "Get Menu with not existing UUID",
+			"url": "http://localhost:8080/m133-salih-naji-pizza-project-1.0/resource/menu/read?uuid=ecd86148-5341-43c6-81ed-f3f4595965d1",
+			"time": 470,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				470
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 629,
+	"collection": {
+		"requests": [
+			{
+				"id": "745ba91a-e0ea-4559-814c-598f2297286c",
+				"method": "GET"
+			},
+			{
+				"id": "16cea74e-dadb-422f-b72b-f6bb6a5b928c",
+				"method": "GET"
+			},
+			{
+				"id": "1b1ea4d7-d48c-400f-b96c-a28d3fea27e0",
+				"method": "GET"
+			},
+			{
+				"id": "eeca6e87-1dd1-4f71-bda5-34ba755ba006",
+				"method": "GET"
+			},
+			{
+				"id": "4b69cc43-df71-4641-b606-c811b96a4be3",
+				"method": "GET"
+			},
+			{
+				"id": "863e0b70-bb5d-42fb-9c0b-32364a5117a6",
+				"method": "GET"
+			}
+		]
+	}
+}

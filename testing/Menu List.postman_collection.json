@@ -1,0 +1,288 @@
+{
+	"info": {
+		"_postman_id": "2f91f98e-0d97-4200-992e-73e1839f41bb",
+		"name": "Menu List",
+		"description": "Test collection of Milestone 1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Alle Pizzas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Validate response\", function(){",
+							"    pm.response.to.be.json;",
+							"    pm.expect(pm.response.text()).to.include(\"durchmesser\");",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URI}}resource/pizza/list",
+					"host": [
+						"{{URI}}resource"
+					],
+					"path": [
+						"pizza",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Alle Menus",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Validate response\", function(){",
+							"    pm.response.to.be.json;",
+							"    pm.expect(pm.response.text()).to.include(\"veroeffentlichung\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URI}}resource/menu/list",
+					"host": [
+						"{{URI}}resource"
+					],
+					"path": [
+						"menu",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Eine Pizza",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Validate response\", function(){",
+							"    pm.response.to.be.json;",
+							"    pm.expect(pm.response.text()).to.include(\"durchmesser\");",
+							"});",
+							"",
+							"pm.test(\"Validate response durchmesser\", function(){",
+							"    const resonseJSON = pm.response.json();",
+							"    pm.expect(resonseJSON.durchmesser).to.eql(30);",
+							"});",
+							"",
+							"pm.test(\"Validate response preis\", function(){",
+							"    const resonseJSON = pm.response.json();",
+							"    pm.expect(resonseJSON.preis).to.eql(14.5);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URI}}resource/pizza/read?uuid=3247c340-c712-402e-b400-0a23a9368c97",
+					"host": [
+						"{{URI}}resource"
+					],
+					"path": [
+						"pizza",
+						"read"
+					],
+					"query": [
+						{
+							"key": "uuid",
+							"value": "3247c340-c712-402e-b400-0a23a9368c97"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Ein Menu",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Validate response\", function(){",
+							"    pm.response.to.be.json;",
+							"    pm.expect(pm.response.text()).to.include(\"veroeffentlichung\");",
+							"});",
+							"",
+							"pm.test(\"Validate response veröffentlichungsdatum\", function(){",
+							"    const resonseJSON = pm.response.json();",
+							"    pm.expect(resonseJSON.veroeffentlichung).to.eql(\"2021-03-01T00:00:00Z[UTC]\");",
+							"});",
+							"",
+							"pm.test(\"Validate response name\", function(){",
+							"    const resonseJSON = pm.response.json();",
+							"    pm.expect(resonseJSON.name).to.eql(\"Sommer-Menu\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URI}}resource/menu/read?uuid=ecd86148-5341-43c6-81ed-f3f4595965dc",
+					"host": [
+						"{{URI}}resource"
+					],
+					"path": [
+						"menu",
+						"read"
+					],
+					"query": [
+						{
+							"key": "uuid",
+							"value": "ecd86148-5341-43c6-81ed-f3f4595965dc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Pizza with not existing UUID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URI}}resource/pizza/read?uuid=ecd86148-5341-43c6-81ed-f3f4595965d1",
+					"host": [
+						"{{URI}}resource"
+					],
+					"path": [
+						"pizza",
+						"read"
+					],
+					"query": [
+						{
+							"key": "uuid",
+							"value": "ecd86148-5341-43c6-81ed-f3f4595965d1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Menu with not existing UUID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URI}}resource/menu/read?uuid=ecd86148-5341-43c6-81ed-f3f4595965d1",
+					"host": [
+						"{{URI}}resource"
+					],
+					"path": [
+						"menu",
+						"read"
+					],
+					"query": [
+						{
+							"key": "uuid",
+							"value": "ecd86148-5341-43c6-81ed-f3f4595965d1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URI",
+			"value": "http://localhost:8080/m133-salih-naji-pizza-project-1.0/"
+		}
+	]
+}
