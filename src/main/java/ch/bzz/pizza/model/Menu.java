@@ -1,5 +1,7 @@
 package ch.bzz.pizza.model;
 
+import ch.bzz.pizza.validierung.MenuConstraint;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -22,8 +24,7 @@ public class Menu {
     @NotNull
     private LocalDate veroeffentlichung;
     @FormParam("name")
-    @NotEmpty
-    @Size(min=2, max=40)
+    @MenuConstraint
     private String name;
 
     public String getMenuUUID() {
