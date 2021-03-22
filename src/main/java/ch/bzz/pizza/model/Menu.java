@@ -19,8 +19,11 @@ import java.util.List;
 public class Menu {
     private String menuUUID;
     @FormParam("veroeffentlichung")
+    @NotNull
     private LocalDate veroeffentlichung;
     @FormParam("name")
+    @NotEmpty
+    @Size(min=2, max=40)
     private String name;
 
     public String getMenuUUID() {
