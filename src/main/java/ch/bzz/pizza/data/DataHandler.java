@@ -4,14 +4,15 @@ package ch.bzz.pizza.data;
 import ch.bzz.pizza.model.Menu;
 import ch.bzz.pizza.model.Pizza;
 import ch.bzz.pizza.service.Config;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * data handler
@@ -22,37 +23,16 @@ import java.util.List;
  */
 public class DataHandler {
     private static final DataHandler instance = new DataHandler();
-    private static List<Menu> menuList = null;
+    private static Map<String, Pizza> pizzaMap;
+    private static Map<String, Menu> menuMap;
 
     /**
      * default constructor: defeat instantiation
      */
     private DataHandler() {
-
-    }
-
-    /**
-     * gets a list of all publishers with their books
-     *
-     * @return
-     */
-    public static List<Menu> getMenuList() {
-        if (menuList == null) {
-            menuList = new ArrayList<>();
-            readJSON();
-        }
-        return menuList;
-    }
-
-    public static List<Pizza> getPizzaList() {
-        List<Pizza> pizzaList = new ArrayList<>();
-
-        for (Menu menu : getMenuList()) {
-            for (Pizza pizza : menu.getPizzas()) {
-                pizzaList.add(pizza);
-            }
-        }
-        return pizzaList;
+        pizzaMap = new HashMap<>();
+        menuMap = new HashMap<>();
+        readJSON();
     }
 
     /**
@@ -61,13 +41,12 @@ public class DataHandler {
      * @param menuUUID zhe uuid of the menu
      * @return menu-object
      */
-    public static Menu findMenuByUUID(String menuUUID) {
-        for (Menu menu : getMenuList()) {
-            if(menu != null && menu.getMenuUUID().equals(menuUUID)){
-                return menu;
-            }
+    public static Menu readMenu(String menuUUID) {
+        Menu menu = null;
+        if (getMenuMap().containsKey(menuUUID)) {
+            menu = getMenuMap().get(menuUUID);
         }
-        return null;
+        return menu;
     }
 
     /**
@@ -76,31 +55,133 @@ public class DataHandler {
      * @param pizzaUUID the uuid of the pizza
      * @return pizza-object
      */
-    public static Pizza findPizzaByUUID(String pizzaUUID) {
-        List<Pizza> pizzaList = getPizzaList();
-        for (Pizza pizza : pizzaList) {
-            if (pizza != null && pizza.getPizzaUUID().equals(pizzaUUID))
-                return pizza;
+    public static Pizza readPizza(String pizzaUUID) {
+        Pizza pizza = null;
+        if (getPizzaMap().containsKey(pizzaUUID)) {
+            pizza = getPizzaMap().get(pizzaUUID);
         }
-
-        return null;
+        return pizza;
     }
 
+    public static void insertPizza(Pizza pizza) {
+        pizza.setPizzaUUID(UUID.randomUUID().toString());
+        getPizzaMap().put(pizza.getPizzaUUID(), pizza);
+        writeJSON();
+    }
 
+    public static boolean updatePizza(Pizza pizza, String pizzaUUID) {
+        if(getPizzaMap().containsKey(pizzaUUID)) {
+            getPizzaMap().put(pizza.getPizzaUUID(), pizza);
+            writeJSON();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean deletePizza(String pizzaUUID) {
+        if (getPizzaMap().remove(pizzaUUID) != null) {
+            writeJSON();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static void insertMenu(Menu menu) {
+        Pizza pizza = new Pizza();
+        pizza.setMenu(menu);
+        insertPizza(pizza);
+    }
+
+    public static boolean updateMenu(Menu menu) {
+        boolean found = false;
+        for (Map.Entry<String, Pizza> entry : getPizzaMap().entrySet()) {
+            Pizza pizza = entry.getValue();
+            if (pizza.getMenu()!= null && pizza.getMenu().getMenuUUID().equals(menu.getMenuUUID())) {
+                pizza.setMenu(menu);
+                found = true;
+            }
+        }
+        writeJSON();
+        return found;
+    }
+
+    public static boolean deleteMenu(String menuUUID) {
+        boolean found = false;
+        for (Map.Entry<String, Pizza> entry : getPizzaMap().entrySet()) {
+            Pizza pizza = entry.getValue();
+            if (pizza.getMenu()!= null && pizza.getMenu().getMenuUUID().equals(menuUUID)) {
+                pizza.setMenu(null);
+                updatePizza(pizza, pizza.getPizzaUUID());
+                found = true;
+            }
+        }
+        return found;
+    }
 
     /**
-     * reads the json-file into the menuList
+     * gets the pizzaMap
+     *
+     * @return the pizzaMap
+     */
+    public static Map<String, Pizza> getPizzaMap() {
+        return pizzaMap;
+    }
+
+    /**
+     * gets the menuMap
+     *
+     * @return the menuMap
+     */
+    public static Map<String, Menu> getMenuMap() {
+        return menuMap;
+    }
+
+    /**
+     * reads the json-file
      */
     private static void readJSON() {
         try {
-            byte[] jsonData = Files.readAllBytes(Paths.get(Config.getProperty("menuJSON")));
+            byte[] jsonData = Files.readAllBytes(Paths.get(Config.getProperty("pizzaJSON")));
             ObjectMapper objectMapper = new ObjectMapper();
-            Menu[] menus = objectMapper.readValue(jsonData, Menu[].class);
-            for (Menu menu : menus) {
-                getMenuList().add(menu);
+            Pizza[] pizzas = objectMapper.readValue(jsonData, Pizza[].class);
+            for (Pizza pizza : pizzas) {
+                if(pizza.getMenu() != null) {
+                    String menuUUID = pizza.getMenu().getMenuUUID();
+                    Menu menu;
+                    if (getMenuMap().containsKey(menuUUID)) {
+                        menu = getMenuMap().get(menuUUID);
+                    } else {
+                        menu = pizza.getMenu();
+                        getMenuMap().put(menuUUID, menu);
+                    }
+                    pizza.setMenu(menu);
+                }
+                getPizzaMap().put(pizza.getPizzaUUID(), pizza);
             }
+
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * write in JSON
+     */
+    private static void writeJSON() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectWriter objectWriter = objectMapper.writer(new DefaultPrettyPrinter());
+        FileOutputStream fileOutputStream = null;
+        Writer fileWriter;
+
+        String pizzaPath = Config.getProperty("pizzaJSON");
+        try {
+            fileOutputStream = new FileOutputStream(pizzaPath);
+            fileWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8));
+            objectWriter.writeValue(fileWriter, getPizzaMap().values());
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 }

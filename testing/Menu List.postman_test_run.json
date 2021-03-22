@@ -1,18 +1,18 @@
 {
-	"id": "53f4a5b2-f20c-4d55-94bf-630b7ed8bd57",
+	"id": "e106a37d-09f8-424f-a0c0-baea81d5ef74",
 	"name": "Menu List",
-	"timestamp": "2021-03-08T21:58:46.612Z",
+	"timestamp": "2021-03-22T13:52:03.539Z",
 	"collection_id": "2f91f98e-0d97-4200-992e-73e1839f41bb",
 	"folder_id": 0,
 	"environment_id": "0",
-	"totalPass": 14,
+	"totalPass": 22,
 	"totalFail": 0,
 	"results": [
 		{
 			"id": "745ba91a-e0ea-4559-814c-598f2297286c",
 			"name": "Get Alle Pizzas",
 			"url": "http://localhost:8080/m133-salih-naji-pizza-project-1.0/resource/pizza/list",
-			"time": 95,
+			"time": 1441,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -32,7 +32,7 @@
 				}
 			},
 			"times": [
-				95
+				1441
 			],
 			"allTests": [
 				{
@@ -45,7 +45,7 @@
 			"id": "16cea74e-dadb-422f-b72b-f6bb6a5b928c",
 			"name": "Get Alle Menus",
 			"url": "http://localhost:8080/m133-salih-naji-pizza-project-1.0/resource/menu/list",
-			"time": 36,
+			"time": 10,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -65,7 +65,7 @@
 				}
 			},
 			"times": [
-				36
+				10
 			],
 			"allTests": [
 				{
@@ -77,8 +77,8 @@
 		{
 			"id": "1b1ea4d7-d48c-400f-b96c-a28d3fea27e0",
 			"name": "Get Eine Pizza",
-			"url": "http://localhost:8080/m133-salih-naji-pizza-project-1.0/resource/pizza/read?uuid=3247c340-c712-402e-b400-0a23a9368c97",
-			"time": 9,
+			"url": "http://localhost:8080/m133-salih-naji-pizza-project-1.0/resource/pizza/read?uuid=3247c340-c712-301f-b400-0a23a9368c97",
+			"time": 51,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -108,7 +108,7 @@
 				}
 			},
 			"times": [
-				9
+				51
 			],
 			"allTests": [
 				{
@@ -122,8 +122,8 @@
 		{
 			"id": "eeca6e87-1dd1-4f71-bda5-34ba755ba006",
 			"name": "Get Ein Menu",
-			"url": "http://localhost:8080/m133-salih-naji-pizza-project-1.0/resource/menu/read?uuid=ecd86148-5341-43c6-81ed-f3f4595965dc",
-			"time": 6,
+			"url": "http://localhost:8080/m133-salih-naji-pizza-project-1.0/resource/menu/read?uuid=606cc4a5-8bfd-4e24-85c1-ecf6b9814712",
+			"time": 5,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -153,7 +153,7 @@
 				}
 			},
 			"times": [
-				6
+				5
 			],
 			"allTests": [
 				{
@@ -168,7 +168,7 @@
 			"id": "4b69cc43-df71-4641-b606-c811b96a4be3",
 			"name": "Get Pizza with not existing UUID",
 			"url": "http://localhost:8080/m133-salih-naji-pizza-project-1.0/resource/pizza/read?uuid=ecd86148-5341-43c6-81ed-f3f4595965d1",
-			"time": 13,
+			"time": 19,
 			"responseCode": {
 				"code": 404,
 				"name": "Not Found"
@@ -183,7 +183,7 @@
 				}
 			},
 			"times": [
-				13
+				19
 			],
 			"allTests": [
 				{
@@ -195,7 +195,7 @@
 			"id": "863e0b70-bb5d-42fb-9c0b-32364a5117a6",
 			"name": "Get Menu with not existing UUID",
 			"url": "http://localhost:8080/m133-salih-naji-pizza-project-1.0/resource/menu/read?uuid=ecd86148-5341-43c6-81ed-f3f4595965d1",
-			"time": 470,
+			"time": 4,
 			"responseCode": {
 				"code": 404,
 				"name": "Not Found"
@@ -210,7 +210,223 @@
 				}
 			},
 			"times": [
-				470
+				4
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "20ee1f12-8175-4a14-b1c8-0310603ab688",
+			"name": "create neue Pizza",
+			"url": "http://localhost:8080/m133-salih-naji-pizza-project-1.0/resource/pizza/create",
+			"time": 620,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				620
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "a94ce511-3400-4197-a43f-bf40db76d6ff",
+			"name": "create neues Menu",
+			"url": "http://localhost:8080/m133-salih-naji-pizza-project-1.0/resource/menu/create",
+			"time": 92,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				92
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "7f0cbd70-2e14-4c82-86ba-1278769e5dad",
+			"name": "Update Pizza",
+			"url": "http://localhost:8080/m133-salih-naji-pizza-project-1.0/resource/pizza/update",
+			"time": 26,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				26
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "2371a3f3-bd20-4b52-aca1-a1189019d17b",
+			"name": "update Menu",
+			"url": "http://localhost:8080/m133-salih-naji-pizza-project-1.0/resource/menu/update",
+			"time": 19,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				19
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "5ae18a7b-8221-4490-81b4-d2efc3389656",
+			"name": "delete Pizza",
+			"url": "http://localhost:8080/m133-salih-naji-pizza-project-1.0/resource/pizza/delete?pizzaUUID=3247c340-c712-301f-b400-0a23a9368c97",
+			"time": 70,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				70
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "487be71d-5e6c-478d-882e-9ce1f09f8bf2",
+			"name": "delete Menu",
+			"url": "http://localhost:8080/m133-salih-naji-pizza-project-1.0/resource/menu/delete?menuUUID=606cc4a5-8bfd-4e24-85c1-ecf6b9814712",
+			"time": 105,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				105
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "c4d818f9-194f-4810-b7bc-5a321e8b9145",
+			"name": "try delete Menu with not existing UUID",
+			"url": "http://localhost:8080/m133-salih-naji-pizza-project-1.0/resource/menu/delete?menuUUID=ecd86148-5341-43c6-81ed-f3f4595965d1",
+			"time": 24,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				24
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "60d4e4c8-e1b2-4464-9997-ed51bc4a2e29",
+			"name": "try delete Pizza with not existing UUID",
+			"url": "http://localhost:8080/m133-salih-naji-pizza-project-1.0/resource/pizza/delete?pizzaUUID=ecd86148-5341-43c6-81ed-f3f4595965d1",
+			"time": 12,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				12
 			],
 			"allTests": [
 				{
@@ -220,7 +436,7 @@
 		}
 	],
 	"count": 1,
-	"totalTime": 629,
+	"totalTime": 2498,
 	"collection": {
 		"requests": [
 			{
@@ -246,6 +462,38 @@
 			{
 				"id": "863e0b70-bb5d-42fb-9c0b-32364a5117a6",
 				"method": "GET"
+			},
+			{
+				"id": "20ee1f12-8175-4a14-b1c8-0310603ab688",
+				"method": "POST"
+			},
+			{
+				"id": "a94ce511-3400-4197-a43f-bf40db76d6ff",
+				"method": "POST"
+			},
+			{
+				"id": "7f0cbd70-2e14-4c82-86ba-1278769e5dad",
+				"method": "PUT"
+			},
+			{
+				"id": "2371a3f3-bd20-4b52-aca1-a1189019d17b",
+				"method": "PUT"
+			},
+			{
+				"id": "5ae18a7b-8221-4490-81b4-d2efc3389656",
+				"method": "DELETE"
+			},
+			{
+				"id": "487be71d-5e6c-478d-882e-9ce1f09f8bf2",
+				"method": "DELETE"
+			},
+			{
+				"id": "c4d818f9-194f-4810-b7bc-5a321e8b9145",
+				"method": "DELETE"
+			},
+			{
+				"id": "60d4e4c8-e1b2-4464-9997-ed51bc4a2e29",
+				"method": "DELETE"
 			}
 		]
 	}

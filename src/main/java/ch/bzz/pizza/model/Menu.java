@@ -1,5 +1,11 @@
 package ch.bzz.pizza.model;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+import javax.ws.rs.FormParam;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -12,9 +18,10 @@ import java.util.List;
  */
 public class Menu {
     private String menuUUID;
-    private Date veroeffentlichung;
+    @FormParam("veroeffentlichung")
+    private LocalDate veroeffentlichung;
+    @FormParam("name")
     private String name;
-    private List<Pizza> pizzas;
 
     public String getMenuUUID() {
         return menuUUID;
@@ -24,11 +31,11 @@ public class Menu {
         this.menuUUID = menuUUID;
     }
 
-    public Date getVeroeffentlichung() {
+    public LocalDate getVeroeffentlichung() {
         return veroeffentlichung;
     }
 
-    public void setVeroeffentlichung(Date veroeffentlichung) {
+    public void setVeroeffentlichung(LocalDate veroeffentlichung) {
         this.veroeffentlichung = veroeffentlichung;
     }
 
@@ -40,11 +47,4 @@ public class Menu {
         this.name = name;
     }
 
-    public List<Pizza> getPizzas() {
-        return pizzas;
-    }
-
-    public void setPizzas(List<Pizza> pizzas) {
-        this.pizzas = pizzas;
-    }
 }

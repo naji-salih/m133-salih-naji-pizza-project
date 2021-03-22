@@ -1,5 +1,8 @@
 package ch.bzz.pizza.model;
 
+import javax.validation.constraints.*;
+import javax.ws.rs.FormParam;
+
 /**
  * data object Pizza
  * <p>
@@ -9,9 +12,19 @@ package ch.bzz.pizza.model;
  */
 public class Pizza {
     private String pizzaUUID;
+    @FormParam("name")
+    @NotEmpty
+    @Size(min=2, max=40)
     private String name;
+    @FormParam("preis")
+    @DecimalMax(value="99.95")
+    @DecimalMin(value="0.05")
     private double preis;
+    @FormParam("durchmesser")
+    @Max(value=99)
+    @Min(value=5)
     private int durchmesser;
+    private Menu menu;
 
     public Pizza(){
 
@@ -47,5 +60,13 @@ public class Pizza {
 
     public void setDurchmesser(int durchmesser) {
         this.durchmesser = durchmesser;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public void setMenu(Menu menu) {
+        this.menu = menu;
     }
 }

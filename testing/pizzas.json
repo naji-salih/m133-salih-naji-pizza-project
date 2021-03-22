@@ -1,0 +1,31 @@
+[ {
+  "pizzaUUID" : "3247c340-c712-301f-b400-0a23a9368c97",
+  "name" : "Funghi",
+  "preis" : 16.5,
+  "durchmesser" : 30,
+  "menu" : {
+    "menuUUID" : "606cc4a5-8bfd-4e24-90b4-ecf6b9814712",
+    "veroeffentlichung" : null,
+    "name" : "Sommermenu"
+  }
+}, {
+  "pizzaUUID" : "3247c340-c712-402e-b400-0a23a9368c97",
+  "name" : "Margheritta",
+  "preis" : 14.5,
+  "durchmesser" : 30,
+  "menu" : {
+    "menuUUID" : "606cc4a5-8bfd-4e24-85c1-ecf6b9814712",
+    "veroeffentlichung" : null,
+    "name" : "Winter-Menu"
+  }
+}, {
+  "pizzaUUID" : "d26511cc-92f8-478c-8cea-652c6a69d1a9",
+  "name" : "Wunschpizza",
+  "preis" : 15.5,
+  "durchmesser" : 30,
+  "menu" : {
+    "menuUUID" : "606cc4a5-8bfd-4e24-85c1-ecf6b9814712",
+    "veroeffentlichung" : null,
+    "name" : "Winter-Menu"
+  }
+} ]

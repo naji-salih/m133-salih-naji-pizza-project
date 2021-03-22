@@ -57,7 +57,7 @@
 							"",
 							"pm.test(\"Validate response\", function(){",
 							"    pm.response.to.be.json;",
-							"    pm.expect(pm.response.text()).to.include(\"veroeffentlichung\");",
+							"    pm.expect(pm.response.text()).to.include(\"name\");",
 							"});"
 						],
 						"type": "text/javascript"
@@ -103,7 +103,7 @@
 							"",
 							"pm.test(\"Validate response preis\", function(){",
 							"    const resonseJSON = pm.response.json();",
-							"    pm.expect(resonseJSON.preis).to.eql(14.5);",
+							"    pm.expect(resonseJSON.preis).to.eql(16.5);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -114,7 +114,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URI}}resource/pizza/read?uuid=3247c340-c712-402e-b400-0a23a9368c97",
+					"raw": "{{URI}}resource/pizza/read?uuid=3247c340-c712-301f-b400-0a23a9368c97",
 					"host": [
 						"{{URI}}resource"
 					],
@@ -125,7 +125,7 @@
 					"query": [
 						{
 							"key": "uuid",
-							"value": "3247c340-c712-402e-b400-0a23a9368c97"
+							"value": "3247c340-c712-301f-b400-0a23a9368c97"
 						}
 					]
 				}
@@ -145,17 +145,17 @@
 							"",
 							"pm.test(\"Validate response\", function(){",
 							"    pm.response.to.be.json;",
-							"    pm.expect(pm.response.text()).to.include(\"veroeffentlichung\");",
+							"    pm.expect(pm.response.text()).to.include(\"menuUUID\");",
 							"});",
 							"",
 							"pm.test(\"Validate response veröffentlichungsdatum\", function(){",
 							"    const resonseJSON = pm.response.json();",
-							"    pm.expect(resonseJSON.veroeffentlichung).to.eql(\"2021-03-01T00:00:00Z[UTC]\");",
+							"    pm.expect(resonseJSON.menuUUID).to.eql(\"606cc4a5-8bfd-4e24-85c1-ecf6b9814712\");",
 							"});",
 							"",
 							"pm.test(\"Validate response name\", function(){",
 							"    const resonseJSON = pm.response.json();",
-							"    pm.expect(resonseJSON.name).to.eql(\"Sommer-Menu\");",
+							"    pm.expect(resonseJSON.name).to.eql(\"Winter-Menu\");",
 							"});"
 						],
 						"type": "text/javascript"
@@ -166,7 +166,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{URI}}resource/menu/read?uuid=ecd86148-5341-43c6-81ed-f3f4595965dc",
+					"raw": "{{URI}}resource/menu/read?uuid=606cc4a5-8bfd-4e24-85c1-ecf6b9814712",
 					"host": [
 						"{{URI}}resource"
 					],
@@ -177,7 +177,7 @@
 					"query": [
 						{
 							"key": "uuid",
-							"value": "ecd86148-5341-43c6-81ed-f3f4595965dc"
+							"value": "606cc4a5-8bfd-4e24-85c1-ecf6b9814712"
 						}
 					]
 				}
@@ -251,6 +251,396 @@
 					"query": [
 						{
 							"key": "uuid",
+							"value": "ecd86148-5341-43c6-81ed-f3f4595965d1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create neue Pizza",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "menuUUID",
+							"value": "606cc4a5-8bfd-4e24-85c1-ecf6b9814712",
+							"type": "text"
+						},
+						{
+							"key": "durchmesser",
+							"value": "30",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Wunschpizza",
+							"type": "text"
+						},
+						{
+							"key": "preis",
+							"value": "15.5",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URI}}resource/pizza/create",
+					"host": [
+						"{{URI}}resource"
+					],
+					"path": [
+						"pizza",
+						"create"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create neues Menu",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "veroeffentlichung",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Fruehling-Menu",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URI}}resource/menu/create",
+					"host": [
+						"{{URI}}resource"
+					],
+					"path": [
+						"menu",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Pizza",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Vegi",
+							"type": "text"
+						},
+						{
+							"key": "preis",
+							"value": "20",
+							"type": "text"
+						},
+						{
+							"key": "durchmesser",
+							"value": "24",
+							"type": "text"
+						},
+						{
+							"key": "pizzaUUID",
+							"value": "d26511cc-92f8-478c-8cea-652c6a69d1a9",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URI}}resource/pizza/update",
+					"host": [
+						"{{URI}}resource"
+					],
+					"path": [
+						"pizza",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update Menu",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "menuUUID",
+							"value": "606cc4a5-8bfd-4e24-90b4-ecf6b9814712",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Sommermenu",
+							"type": "text"
+						},
+						{
+							"key": "veroeffentlichung",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URI}}resource/menu/update",
+					"host": [
+						"{{URI}}resource"
+					],
+					"path": [
+						"menu",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete Pizza",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{URI}}resource/pizza/delete?pizzaUUID=3247c340-c712-301f-b400-0a23a9368c97",
+					"host": [
+						"{{URI}}resource"
+					],
+					"path": [
+						"pizza",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "pizzaUUID",
+							"value": "3247c340-c712-301f-b400-0a23a9368c97"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete Menu",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{URI}}resource/menu/delete?menuUUID=606cc4a5-8bfd-4e24-85c1-ecf6b9814712",
+					"host": [
+						"{{URI}}resource"
+					],
+					"path": [
+						"menu",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "menuUUID",
+							"value": "606cc4a5-8bfd-4e24-85c1-ecf6b9814712"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "try delete Menu with not existing UUID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{URI}}resource/menu/delete?menuUUID=ecd86148-5341-43c6-81ed-f3f4595965d1",
+					"host": [
+						"{{URI}}resource"
+					],
+					"path": [
+						"menu",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "menuUUID",
+							"value": "ecd86148-5341-43c6-81ed-f3f4595965d1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "try delete Pizza with not existing UUID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{URI}}resource/pizza/delete?pizzaUUID=ecd86148-5341-43c6-81ed-f3f4595965d1",
+					"host": [
+						"{{URI}}resource"
+					],
+					"path": [
+						"pizza",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "pizzaUUID",
 							"value": "ecd86148-5341-43c6-81ed-f3f4595965d1"
 						}
 					]
