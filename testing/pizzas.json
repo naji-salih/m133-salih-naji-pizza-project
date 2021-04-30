@@ -1,4 +1,10 @@
 [ {
+  "pizzaUUID" : null,
+  "name" : "Najisneuepizza3",
+  "preis" : 30.5,
+  "durchmesser" : 21,
+  "menu" : null
+}, {
   "pizzaUUID" : "3247c340-c712-301f-b400-0a23a9368c97",
   "name" : "Funghi",
   "preis" : 16.5,
@@ -19,10 +25,20 @@
     "name" : "Winter-Menu"
   }
 }, {
-  "pizzaUUID" : "d26511cc-92f8-478c-8cea-652c6a69d1a9",
-  "name" : "Wunschpizza",
-  "preis" : 15.5,
+  "pizzaUUID" : "4cc30056-d679-43ff-9645-3632a984bb20",
+  "name" : "Najisneuepizza",
+  "preis" : 20.5,
   "durchmesser" : 30,
+  "menu" : {
+    "menuUUID" : "606cc4a5-8bfd-4e24-85c1-ecf6b9814712",
+    "veroeffentlichung" : null,
+    "name" : "Winter-Menu"
+  }
+}, {
+  "pizzaUUID" : "33baa1c3-b4fe-4205-979f-c8ed150699e2",
+  "name" : "Najisneuepizza3",
+  "preis" : 30.5,
+  "durchmesser" : 20,
   "menu" : {
     "menuUUID" : "606cc4a5-8bfd-4e24-85c1-ecf6b9814712",
     "veroeffentlichung" : null,

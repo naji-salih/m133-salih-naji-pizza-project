@@ -1,0 +1,11 @@
+[ {
+  "userUUID": "3247c340-c712-301f-b400-0a23a9368c97",
+  "username" : "naji",
+  "password" : "12345",
+  "role": "admin"
+},{
+  "userUUID": "3247c340-c712-301f-b400-0a23a9368c11",
+  "username" : "guest",
+  "password" : "12345",
+  "role": "guest"
+} ]
