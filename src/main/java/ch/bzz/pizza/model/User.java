@@ -1,47 +1,86 @@
 package ch.bzz.pizza.model;
 
 /**
- * data object User
- * <p>
- * M133
- *
- * @author Naji Salih
+ * an application user
  */
 public class User {
     private String userUUID;
-    private String userName;
+    private String username;
     private String password;
-    private String telefonNummer;
+    private String role;
 
+    public User() {
+        setRole("guest");
+    }
+
+    /**
+     * Get the userUUID
+     * @return value of userUUID
+     */
     public String getUserUUID() {
         return userUUID;
     }
 
+    /**
+     * Sets the userUUID
+     * @param userUUID
+     */
     public void setUserUUID(String userUUID) {
         this.userUUID = userUUID;
     }
 
-    public String getUserName() {
-        return userName;
+    /**
+     * Gets the username
+     *
+     * @return value of username
+     */
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    /**
+     * Sets the username
+     *
+     * @param username the value to set
+     */
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
+    /**
+     * Gets the password
+     * @return the password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Sets the password
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getTelefonNummer() {
-        return telefonNummer;
+    /**
+     * Gets the role
+     *
+     * @return value of role
+     */
+    public String getRole() {
+        return role;
     }
 
-    public void setTelefonNummer(String telefonNummer) {
-        this.telefonNummer = telefonNummer;
+    /**
+     * Sets the role
+     *
+     * @param role the value to set
+     */
+
+    public void setRole(String role) {
+        this.role = role;
     }
+
 }

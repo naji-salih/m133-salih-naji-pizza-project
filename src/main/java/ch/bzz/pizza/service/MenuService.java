@@ -25,10 +25,19 @@ public class MenuService {
     @Produces(MediaType.APPLICATION_JSON)
 
     public Response listMenu(
+            @CookieParam("userRole") String userRole
     ) {
-        Map<String, Menu> menuMap = DataHandler.getMenuMap();
+        Map<String, Menu> menuMap = null;
+        int httpStatus;
+        if(!userRole.equals("admin") && !userRole.equals("restaurantManager") && !userRole.equals("chief")){
+            httpStatus = 403;
+        } else {
+            httpStatus = 200;
+            menuMap = DataHandler.getMenuMap();
+        }
+
         Response response = Response
-                .status(200)
+                .status(httpStatus)
                 .entity(menuMap)
                 .build();
         return response;
@@ -45,21 +54,25 @@ public class MenuService {
     @Produces(MediaType.APPLICATION_JSON)
 
     public Response readMenu(
-            @QueryParam("uuid") String menuUUID
+            @QueryParam("uuid") String menuUUID,
+            @CookieParam("userRole") String userRole
     ) {
         Menu menu = null;
         int httpStatus;
-
-        try {
-            UUID menuKey = UUID.fromString(menuUUID);
-            menu = DataHandler.readMenu(menuUUID);
-            if (menu != null) {
-                httpStatus = 200;
-            } else {
-                httpStatus = 404;
+        if(!userRole.equals("admin") && !userRole.equals("restaurantManager") && !userRole.equals("chief")){
+            httpStatus = 403;
+        } else {
+            try {
+                UUID menuKey = UUID.fromString(menuUUID);
+                menu = DataHandler.readMenu(menuUUID);
+                if (menu != null) {
+                    httpStatus = 200;
+                } else {
+                    httpStatus = 404;
+                }
+            } catch (IllegalArgumentException argEx) {
+                httpStatus = 400;
             }
-        } catch (IllegalArgumentException argEx) {
-            httpStatus = 400;
         }
 
         Response response = Response
@@ -77,11 +90,17 @@ public class MenuService {
     @Path("create")
     @Produces(MediaType.TEXT_PLAIN)
     public Response createMenu(
-            @Valid @BeanParam Menu menu
+            @Valid @BeanParam Menu menu,
+            @CookieParam("userRole") String userRole
     ) {
-        int httpStatus = 200;
-        menu.setMenuUUID(UUID.randomUUID().toString());
-        DataHandler.insertMenu(menu);
+        int httpStatus;
+        if(!userRole.equals("admin") && !userRole.equals("restaurantManager") && !userRole.equals("chief")){
+            httpStatus = 403;
+        } else {
+            httpStatus = 200;
+            menu.setMenuUUID(UUID.randomUUID().toString());
+            DataHandler.insertMenu(menu);
+        }
 
         Response response = Response
                 .status(httpStatus)
@@ -101,19 +120,24 @@ public class MenuService {
     public Response updateMenu(
             @Valid @BeanParam Menu menu,
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
-            @FormParam("menuUUID") String menuUUID
+            @FormParam("menuUUID") String menuUUID,
+            @CookieParam("userRole") String userRole
     ) {
-        int httpStatus = 200;
-        try {
-            UUID.fromString(menuUUID);
-            menu.setMenuUUID(menuUUID);
-            if (DataHandler.updateMenu(menu)) {
-                httpStatus = 200;
-            } else {
-                httpStatus = 404;
-            }
-        } catch (IllegalArgumentException argEx) {
-            httpStatus = 400;
+        int httpStatus;
+        if(!userRole.equals("admin") && !userRole.equals("restaurantManager") && !userRole.equals("chief")){
+            httpStatus = 403;
+        } else {
+            try {
+                UUID.fromString(menuUUID);
+                menu.setMenuUUID(menuUUID);
+                if (DataHandler.updateMenu(menu)) {
+                    httpStatus = 200;
+                } else {
+                    httpStatus = 404;
+                }
+            } catch (IllegalArgumentException argEx) {
+                httpStatus = 400;
+        }
         }
         Response response = Response
                 .status(httpStatus)
@@ -127,16 +151,21 @@ public class MenuService {
     @Produces(MediaType.TEXT_PLAIN)
     public Response deleteMenu(
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
-            @QueryParam("menuUUID") String menuUUID
+            @QueryParam("menuUUID") String menuUUID,
+            @CookieParam("userRole") String userRole
     ) {
         int httpStatus;
-        try {
-            UUID.fromString(menuUUID);
-            boolean success = DataHandler.deleteMenu(menuUUID);
-            if (success) httpStatus = 200;
-            else httpStatus = 404;
-        } catch (IllegalArgumentException argEx) {
-            httpStatus = 400;
+        if(!userRole.equals("admin") && !userRole.equals("restaurantManager") && !userRole.equals("chief")){
+            httpStatus = 403;
+        } else {
+            try {
+                UUID.fromString(menuUUID);
+                boolean success = DataHandler.deleteMenu(menuUUID);
+                if (success) httpStatus = 200;
+                else httpStatus = 404;
+            } catch (IllegalArgumentException argEx) {
+                httpStatus = 400;
+            }
         }
         Response response = Response
                 .status(httpStatus)

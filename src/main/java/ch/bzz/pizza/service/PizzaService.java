@@ -26,14 +26,23 @@ public class PizzaService {
 
 
     public Response listPizza(
+            @CookieParam("userRole") String userRole
     ) {
-        Map<String, Pizza> pizzapizzaMap = DataHandler.getPizzaMap();
+        int httpStatus;
+        Map<String, Pizza> pizzapizzaMap = null;
+        if(!userRole.equals("admin") && !userRole.equals("restaurantManager") && !userRole.equals("chief")){
+            httpStatus = 403;
+        } else {
+            httpStatus = 200;
+            pizzapizzaMap = DataHandler.getPizzaMap();
+        }
         Response response = Response
-                .status(200)
+                .status(httpStatus)
                 .entity(pizzapizzaMap)
                 .build();
         return response;
     }
+
 
     /**
      * reads a single pizza identified by the pizzaUUID
@@ -47,24 +56,27 @@ public class PizzaService {
 
     public Response readPizza(
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
-            @QueryParam("uuid") String pizzaUUID
+            @QueryParam("uuid") String pizzaUUID,
+            @CookieParam("userRole") String userRole
 
     ) {
         Pizza pizza = null;
         int httpStatus;
-
-        try {
-            UUID pizzyKey = UUID.fromString(pizzaUUID);
-            pizza = DataHandler.readPizza(pizzaUUID);
-            if (pizza != null) {
-                httpStatus = 200;
-            } else {
-                httpStatus = 404;
+        if(!userRole.equals("admin") && !userRole.equals("restaurantManager") && !userRole.equals("chief")){
+            httpStatus = 403;
+        } else {
+            try {
+                UUID pizzyKey = UUID.fromString(pizzaUUID);
+                pizza = DataHandler.readPizza(pizzaUUID);
+                if (pizza != null) {
+                    httpStatus = 200;
+                } else {
+                    httpStatus = 404;
+                }
+            } catch (IllegalArgumentException argEx) {
+                httpStatus = 400;
             }
-        } catch (IllegalArgumentException argEx) {
-            httpStatus = 400;
         }
-
         Response response = Response
                 .status(httpStatus)
                 .entity(pizza)
@@ -83,13 +95,18 @@ public class PizzaService {
     public Response createPizza(
            @Valid @BeanParam Pizza pizza,
            @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
-           @FormParam("menuUUID") String menuUUID
+           @FormParam("menuUUID") String menuUUID,
+           @CookieParam("userRole") String userRole
     ) {
-        int httpStatus = 200;
-        Menu menu = DataHandler.getMenuMap().get(menuUUID);
-        pizza.setMenu(menu);
-        DataHandler.insertPizza(pizza);
-
+       int httpStatus;
+        if(!userRole.equals("admin") && !userRole.equals("restaurantManager") && !userRole.equals("chief")){
+            httpStatus = 403;
+        } else {
+            httpStatus = 200;
+            Menu menu = DataHandler.getMenuMap().get(menuUUID);
+            pizza.setMenu(menu);
+            DataHandler.insertPizza(pizza);
+        }
         Response response = Response
                 .status(httpStatus)
                 .entity("")
@@ -106,20 +123,24 @@ public class PizzaService {
     public Response updatePizza(
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
             @FormParam("pizzaUUID") String pizzaUUID,
-            @Valid @BeanParam Pizza pizza
+            @Valid @BeanParam Pizza pizza,
+            @CookieParam("userRole") String userRole
     ) {
-        int httpStatus = 200;
-        try {
+        int httpStatus;
+        if(!userRole.equals("admin") && !userRole.equals("restaurantManager") && !userRole.equals("chief")){
+            httpStatus = 403;
+        } else {
+            try {
                 boolean success = DataHandler.updatePizza(pizza, pizzaUUID);
                 if (success) {
                     httpStatus = 200;
                 } else {
                     httpStatus = 404;
                 }
-        } catch (IllegalArgumentException argEx) {
-            httpStatus = 400;
+            } catch (IllegalArgumentException argEx) {
+                httpStatus = 400;
+            }
         }
-
         Response response = Response
                 .status(httpStatus)
                 .entity("")
@@ -135,20 +156,23 @@ public class PizzaService {
     @Produces(MediaType.TEXT_PLAIN)
     public Response deletePizza(
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
-            @QueryParam("pizzaUUID") String pizzaUUID
+            @QueryParam("pizzaUUID") String pizzaUUID,
+            @CookieParam("userRole") String userRole
     ) {
         int httpStatus;
-        try {
-            UUID.fromString(pizzaUUID);
-
-            if (DataHandler.deletePizza(pizzaUUID)) {
-                httpStatus = 200;
-
-            } else {
-                httpStatus = 404;
+        if(!userRole.equals("admin") && !userRole.equals("restaurantManager") && !userRole.equals("chief")){
+            httpStatus = 403;
+        } else {
+            try {
+                UUID.fromString(pizzaUUID);
+                if (DataHandler.deletePizza(pizzaUUID)) {
+                    httpStatus = 200;
+                } else {
+                    httpStatus = 404;
+                }
+            } catch (IllegalArgumentException argEx) {
+                httpStatus = 400;
             }
-        } catch (IllegalArgumentException argEx) {
-            httpStatus = 400;
         }
 
         Response response = Response

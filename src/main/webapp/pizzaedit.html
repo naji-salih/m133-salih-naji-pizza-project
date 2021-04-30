@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="project" content="Pizza project"/>
+    <meta name="description" content="pizza form edit"/>
+    <title>Pizza bearbeiten</title>
+</head>
+<body>
+<form id="pizzaeditForm" name="pizzaedit">
+    <h3>Pizza bearbeiten</h3>
+    <div id="message" style="color: red;"></div>
+    <button type="button" id="logoff">Abmelden</button>
+    <table>
+        <tr>
+            <td><label for="name">Pizzaname</label></td>
+            <td>
+                <input id="name" name="name" type="text" size="30" minlength="2" maxlength="30" required/>
+                <input id="pizzaUUID" name="pizzaUUID" type="hidden" />
+            </td>
+        </tr>
+        <tr>
+            <td><label for="preis">Preis</label></td>
+            <td><input id="preis" name="preis" type="number" min="0.05" max="199.95" step="0.05"/></td>
+        </tr>
+        <tr>
+            <td><label for="durchmesser">durchmesser</label></td>
+            <td><input id="durchmesser" name="durchmesser" type="number" min="1" max="100"/></td>
+        </tr>
+        <tr>
+            <td><label for="menu">Menu</label></td>
+            <td>
+                <select id="menu" name="menuUUID" required>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>
+                <button id="save" type="submit">Speichern</button>
+            </td>
+            <td>
+                <button id="reset" type="reset">Zurücksetzen</button>
+            </td>
+            <td>
+                <button id="cancel" type="button">Abbruch</button>
+            </td>
+        </tr>
+    </table>
+</form>
+<script src="./js/jquery-3.6.0.min.js"></script>
+<script src="./js/pizzaedit.js"></script>
+<script src="./js/util.js"></script>
+<script src="./js/js.cookie.js"></script>
+</body>
+</html>

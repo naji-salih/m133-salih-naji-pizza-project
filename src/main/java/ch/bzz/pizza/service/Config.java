@@ -33,6 +33,7 @@ public class Config extends Application {
         HashSet providers = new HashSet<Class<?>>();
         providers.add(PizzaService.class);
         providers.add(MenuService.class);
+        providers.add(UserService.class);
         return providers;
     }
 
